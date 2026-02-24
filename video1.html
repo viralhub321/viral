@@ -6,8 +6,19 @@
 <title>Video Detail</title>
 
 <style>
-body{margin:0;background:#111;color:white;font-family:Arial;padding:20px}
-.player img{width:100%;border-radius:6px}
+body{
+margin:0;
+background:#111;
+color:white;
+font-family:Arial;
+padding:20px;
+}
+
+.player img{
+width:100%;
+border-radius:6px;
+}
+
 .play-btn{
 display:block;
 background:#ff9900;
@@ -19,36 +30,89 @@ font-weight:bold;
 text-decoration:none;
 border-radius:5px;
 }
-.related{
+
+.related-grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+grid-template-columns:repeat(2,1fr);
 gap:10px;
-margin-top:30px;
+margin-top:15px;
 }
-.related img{width:100%;border-radius:5px}
+
+.related-item img{
+width:100%;
+border-radius:6px;
+}
+
+.related-title{
+font-size:13px;
+margin:5px 0 2px 0;
+color:white;
+}
+
+.related-views{
+font-size:12px;
+color:#aaa;
+margin:0;
+}
+
+@media(min-width:768px){
+.related-grid{
+grid-template-columns:repeat(4,1fr);
+}
+}
 </style>
 </head>
 <body>
 
-<h1>Viral Cewek Cantik Joget Malam Hari</h1>
+<h1>Video Viral Indo 2026</h1>
 
-<div class="player">
-<img src="THUMB_URL">
-</div>
+<img src="thumb1.jpg" style="width:100%;border-radius:6px;">
 
-<p>Deskripsi singkat video viral terbaru kualitas HD. Klik play untuk menonton.</p>
+<p id="mainViews" style="color:#aaa;font-size:14px;"></p>
 
-<a href="LINK_ADSTERRA" target="_blank" class="play-btn">
+<a href="LINK_ADSTERRA" class="play-btn">
 ▶ PLAY VIDEO
 </a>
 
-<h3>Video Terkait</h3>
+<h3 style="margin-top:30px;">Video Terkait</h3>
 
-<div class="related">
-<a href="video1.html"><img src="THUMB_URL"></a>
-<a href="video1.html"><img src="THUMB_URL"></a>
-<a href="video1.html"><img src="THUMB_URL"></a>
-</div>
+<div class="related-grid" id="relatedVideos"></div>
+
+<script>
+const images = [
+"thumb1.jpg",
+"thumb2.jpg",
+"thumb3.jpg",
+"thumb4.jpg",
+"thumb5.jpg",
+"thumb6.jpg"
+];
+
+function randomViews() {
+    return (Math.floor(Math.random() * 800000) + 20000)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+// View utama
+document.getElementById("mainViews").innerText =
+randomViews() + " views";
+
+const related = document.getElementById("relatedVideos");
+
+for (let i = 0; i < images.length; i++) {
+
+    related.innerHTML += `
+    <div class="related-item">
+        <a href="video1.html" style="text-decoration:none;color:white;">
+            <img src="${images[i]}">
+            <p class="related-title">Video Viral #${i+1}</p>
+            <p class="related-views">${randomViews()} views</p>
+        </a>
+    </div>
+    `;
+}
+</script>
 
 </body>
 </html>
