@@ -84,49 +84,6 @@ padding:20px;
 
 <div class="grid">
 
-<div class="grid" id="videoGrid"></div>
-
-<script>
-const totalVideo = 20;
-
-const categories = ["Indo", "Jepang", "Barat", "Viral", "Live", "HD"];
-
-const grid = document.getElementById("videoGrid");
-
-function randomViews() {
-    return (Math.floor(Math.random() * 900000) + 10000)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-function randomCategory() {
-    return categories[Math.floor(Math.random() * categories.length)];
-}
-
-for (let i = 1; i <= totalVideo; i++) {
-
-    const views = randomViews();
-    const category = randomCategory();
-    const durationMin = Math.floor(Math.random() * 20) + 5;
-    const durationSec = Math.floor(Math.random() * 59);
-
-    grid.innerHTML += `
-    <div class="video">
-        <a href="video1.html">
-            <div class="thumb">
-                <img src="THUMB_URL">
-                <span class="duration">${durationMin}:${durationSec.toString().padStart(2,'0')}</span>
-            </div>
-            <p>Video Viral #${i}</p>
-            <p style="color:#aaa;font-size:12px;">
-                ${category} • ${views} views
-            </p>
-        </a>
-    </div>
-    `;
-}
-</script>  
-  
 <div class="video">
 <a href="video1.html">
 <div class="thumb">
