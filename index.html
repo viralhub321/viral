@@ -6,47 +6,127 @@
 <title>Video Viral Indo</title>
 
 <style>
-body{margin:0;background:#111;color:white;font-family:Arial}
-header{background:#000;padding:15px;font-size:22px;color:#ff9900}
+body{
+margin:0;
+background:#111;
+color:white;
+font-family:Arial;
+}
+
+header{
+background:#000;
+padding:15px;
+font-size:18px;
+color:#ff9900;
+text-align:center;
+}
+
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-gap:15px;
-padding:20px;
+grid-template-columns:repeat(2,1fr); /* HP default 2 kolom */
+gap:10px;
+padding:10px;
 }
+
 .video{
 background:#1a1a1a;
 border-radius:6px;
 overflow:hidden;
 }
+
 .thumb{
 position:relative;
 }
+
 .thumb img{
 width:100%;
 display:block;
 }
+
 .duration{
 position:absolute;
 bottom:5px;
 right:5px;
 background:black;
 padding:2px 6px;
-font-size:12px;
+font-size:11px;
 }
+
 .video p{
-padding:10px;
-font-size:14px;
+padding:8px;
+font-size:13px;
 margin:0;
 }
+
+.meta{
+color:#aaa;
+font-size:11px;
+padding:0 8px 8px 8px;
+}
+
+/* Tablet */
+@media (min-width: 600px){
+.grid{
+grid-template-columns:repeat(3,1fr);
+}
+}
+
+/* Desktop */
+@media (min-width: 992px){
+.grid{
+grid-template-columns:repeat(5,1fr);
+padding:20px;
+}
+}
 </style>
-</head>
-<body>
 
 <header>VIDEO VIRAL INDO</header>
 
 <div class="grid">
 
+<div class="grid" id="videoGrid"></div>
+
+<script>
+const totalVideo = 20;
+
+const categories = ["Indo", "Jepang", "Barat", "Viral", "Live", "HD"];
+
+const grid = document.getElementById("videoGrid");
+
+function randomViews() {
+    return (Math.floor(Math.random() * 900000) + 10000)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+function randomCategory() {
+    return categories[Math.floor(Math.random() * categories.length)];
+}
+
+for (let i = 1; i <= totalVideo; i++) {
+
+    const views = randomViews();
+    const category = randomCategory();
+    const durationMin = Math.floor(Math.random() * 20) + 5;
+    const durationSec = Math.floor(Math.random() * 59);
+
+    grid.innerHTML += `
+    <div class="video">
+        <a href="video1.html">
+            <div class="thumb">
+                <img src="THUMB_URL">
+                <span class="duration">${durationMin}:${durationSec.toString().padStart(2,'0')}</span>
+            </div>
+            <p>Video Viral #${i}</p>
+            <p style="color:#aaa;font-size:12px;">
+                ${category} • ${views} views
+            </p>
+        </a>
+    </div>
+    `;
+}
+</script>  
+  
 <div class="video">
 <a href="video1.html">
 <div class="thumb">
