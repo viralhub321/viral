@@ -14,11 +14,6 @@ font-family:Arial;
 padding:20px;
 }
 
-.player img{
-width:100%;
-border-radius:6px;
-}
-
 .play-btn{
 display:block;
 background:#ff9900;
@@ -31,6 +26,13 @@ text-decoration:none;
 border-radius:5px;
 }
 
+.main-thumb img{
+width:100%;
+aspect-ratio:4/5;
+object-fit:cover;
+border-radius:8px;
+}
+
 .related-grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -38,9 +40,16 @@ gap:10px;
 margin-top:15px;
 }
 
+.related-item{
+border-radius:8px;
+overflow:hidden;
+}
+
 .related-item img{
 width:100%;
-border-radius:6px;
+aspect-ratio:4/5;
+object-fit:cover;
+display:block;
 }
 
 .related-title{
@@ -64,9 +73,11 @@ grid-template-columns:repeat(4,1fr);
 </head>
 <body>
 
-<h1>Video Viral Indo 2026</h1>
+<h1 id="videoTitle"></h1>
 
-<img src="thumb1.jpg" style="width:100%;border-radius:6px;">
+<div class="main-thumb">
+<img id="mainImage">
+</div>
 
 <p id="mainViews" style="color:#aaa;font-size:14px;"></p>
 
@@ -75,43 +86,67 @@ grid-template-columns:repeat(4,1fr);
 </a>
 
 <h3 style="margin-top:30px;">Video Terkait</h3>
-
 <div class="related-grid" id="relatedVideos"></div>
 
 <script>
-const images = [
-"thumb1.jpg",
-"thumb2.jpg",
-"thumb3.jpg",
-"thumb4.jpg",
-"thumb5.jpg",
-"thumb6.jpg"
+const videos = [
+{
+title: "Viral Cewek Indo",
+image: "thumb1.jpg"
+},
+{
+title: "Skandal Terbaru 2026",
+image: "thumb2.jpg"
+},
+{
+title: "Trending Malam Ini",
+image: "thumb3.jpg"
+},
+{
+title: "Hot Update Hari Ini",
+image: "thumb4.jpg"
+},
+{
+title: "Rekaman Mengejutkan",
+image: "thumb5.jpg"
+},
+{
+title: "Viral TikTok Indo",
+image: "thumb6.jpg"
+}
 ];
 
-function randomViews() {
-    return (Math.floor(Math.random() * 800000) + 20000)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+function randomViews(){
+return (Math.floor(Math.random()*800000)+20000)
+.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
 }
 
-// View utama
-document.getElementById("mainViews").innerText =
-randomViews() + " views";
+const params = new URLSearchParams(window.location.search);
+let id = parseInt(params.get("id"));
+
+if(isNaN(id) || id < 0 || id >= videos.length){
+id = 0;
+}
+
+document.getElementById("videoTitle").innerText = videos[id].title;
+document.getElementById("mainImage").src = videos[id].image;
+document.getElementById("mainViews").innerText = randomViews()+" views";
 
 const related = document.getElementById("relatedVideos");
 
-for (let i = 0; i < images.length; i++) {
-
-    related.innerHTML += `
-    <div class="related-item">
-        <a href="video1.html" style="text-decoration:none;color:white;">
-            <img src="${images[i]}">
-            <p class="related-title">Video Viral #${i+1}</p>
-            <p class="related-views">${randomViews()} views</p>
-        </a>
-    </div>
-    `;
+videos.forEach((video,index)=>{
+if(index !== id){
+related.innerHTML += `
+<div class="related-item">
+<a href="video.html?id=${index}" style="text-decoration:none;color:white;">
+<img src="${video.image}">
+<p class="related-title">${video.title}</p>
+<p class="related-views">${randomViews()} views</p>
+</a>
+</div>
+`;
 }
+});
 </script>
 
 </body>
