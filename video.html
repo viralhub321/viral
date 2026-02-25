@@ -125,6 +125,19 @@ transition:0.3s;
 .action-bar span:hover{
 color:#ff9900;
 }
+.action-bar a{
+color:inherit;        /* ikut warna parent */
+text-decoration:none; /* hilangin garis bawah */
+}
+
+.action-bar a:visited{
+color:inherit;        /* biar gak jadi ungu */
+}
+
+.action-bar a:hover{
+color:#ff9900;        /* hover tetap kuning */
+}  
+  
 </style>
 </head>
 <div style="text-align:center;margin-bottom:15px;">
@@ -139,16 +152,18 @@ ViralHUB
 <img id="mainImage">
 </div>
 <div class="action-bar">
+
 <div class="left-actions">
 <span>👁 <span id="mainViews2"></span></span>
-<span>👍 <span id="likePercent"></span></span>
-<span>👎 <span id="dislikePercent"></span></span>
+<a href="https://linklike.com" target="_blank">👍 <span id="likePercent"></span></a>
+<a href="https://linkdislike.com" target="_blank">👎 <span id="dislikePercent"></span></a>
+</div>
+<div class="right-actions">
+<a href="https://linkkomen.com" target="_blank">💬 <span id="commentCount"></span></a>
+<a href="https://linkdownload.com" target="_blank">⬇ Unduh</a>
+<a href="https://linkshare.com" target="_blank">🔗 Bagikan</a>
 </div>
 
-<div class="right-actions">
-<span>💬 <span id="commentCount"></span></span>
-<span>⬇ Unduh</span>
-<span>🔗 Bagikan</span>
 </div>
 </div>
   
@@ -165,11 +180,11 @@ Klik Disini Jika Error ❗
 <div class="related-grid" id="relatedVideos"></div>
 <div class="pagination">
 <a href="#" class="page active">1</a>
-<a href="#">2</a>
-<a href="#">3</a>
-<a href="#">4</a>
-<a href="#">5</a>
-<a href="#">Next ›</a>
+<a href="https://lucentanxiouslyfleeting.com/xzinutpye0?key=995e9a44df2051b7e72d8fba117c3c6f">2</a>
+<a href="https://lucentanxiouslyfleeting.com/xzinutpye0?key=995e9a44df2051b7e72d8fba117c3c6f">3</a>
+<a href="https://lucentanxiouslyfleeting.com/xzinutpye0?key=995e9a44df2051b7e72d8fba117c3c6f">4</a>
+<a href="https://lucentanxiouslyfleeting.com/xzinutpye0?key=995e9a44df2051b7e72d8fba117c3c6f">5</a>
+<a href="https://lucentanxiouslyfleeting.com/xzinutpye0?key=995e9a44df2051b7e72d8fba117c3c6f">Next ›</a>
 </div>
   
 <script>
@@ -255,6 +270,10 @@ document.getElementById("commentCount").innerText = randomComments();
   
 const related = document.getElementById("relatedVideos");
 
+function randomDuration(){
+return Math.floor(Math.random() * 8) + 5; 
+// 5 sampai 12 (karena 5 + 0-7)
+}  
 videos.forEach((video,index)=>{
 if(index !== id){
 related.innerHTML += `
@@ -262,7 +281,9 @@ related.innerHTML += `
 <a href="video.html?id=${index}" style="text-decoration:none;color:white;">
 <img src="${video.image}">
 <p class="related-title">${video.title}</p>
-<p class="related-views">${randomViews()} views</p>
+<p class="related-views">
+${randomViews()} views • ${randomDuration()} min
+</p>
 </a>
 </div>
 `;
