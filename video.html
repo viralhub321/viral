@@ -97,6 +97,34 @@ background:#ff9900;
 color:black;
 font-weight:bold;
 }  
+.action-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:15px;
+padding:10px 0;
+border-bottom:1px solid #222;
+font-size:14px;
+color:#ccc;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.left-actions,
+.right-actions{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.action-bar span{
+cursor:pointer;
+transition:0.3s;
+}
+
+.action-bar span:hover{
+color:#ff9900;
+}
 </style>
 </head>
 <div style="text-align:center;margin-bottom:15px;">
@@ -110,8 +138,20 @@ ViralHUB
 <div class="main-thumb">
 <img id="mainImage">
 </div>
+<div class="action-bar">
+<div class="left-actions">
+<span>👁 <span id="mainViews2"></span></span>
+<span>👍 <span id="likePercent"></span></span>
+<span>👎 <span id="dislikePercent"></span></span>
+</div>
 
-<p id="mainViews" style="color:#aaa;font-size:14px;"></p>
+<div class="right-actions">
+<span>💬 <span id="commentCount"></span></span>
+<span>⬇ Unduh</span>
+<span>🔗 Bagikan</span>
+</div>
+</div>
+  
 
 <a href="https://lucentanxiouslyfleeting.com/xzinutpye0?key=995e9a44df2051b7e72d8fba117c3c6f" class="play-btn">
 ▶ PLAY VIDEO
@@ -147,7 +187,7 @@ title: "ANDINI PERMATA X ADIK",
 image: "thumb3.jpg"
 },
 {
-title: "Tiara Kartika tiktokers cantik yang VCS sama mantannya, tapi malah di sebar videonya.",
+title: "Tiara Kartika tiktokers cantik yang VCS sama mantannya.",
 image: "thumb4.jpg"
 },
 {
@@ -194,8 +234,25 @@ id = 0;
 
 document.getElementById("videoTitle").innerText = videos[id].title;
 document.getElementById("mainImage").src = videos[id].image;
-document.getElementById("mainViews").innerText = randomViews()+" views";
+document.getElementById("mainViews2").innerText = randomViews()+" views";
+// ==== RANDOM FUNCTION ====
+function randomLike(){
+return Math.floor(Math.random()*6)+94;
+}
 
+function randomComments(){
+return Math.floor(Math.random()*300)+10;
+}
+
+// ==== SET DATA ====
+document.getElementById("mainViews2").innerText = randomViews()+" views";
+
+let like = randomLike();
+document.getElementById("likePercent").innerText = like+"%";
+document.getElementById("dislikePercent").innerText = (100-like)+"%";
+
+document.getElementById("commentCount").innerText = randomComments();
+  
 const related = document.getElementById("relatedVideos");
 
 videos.forEach((video,index)=>{
