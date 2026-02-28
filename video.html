@@ -306,10 +306,14 @@ function getViews(videoId){
   return views.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
 }
 
+const params = new URLSearchParams(window.location.search);
+let id = parseInt(params.get("id"));
+if(isNaN(id) || id < 0 || id >= videos.length) id = 0;
+
 document.getElementById("videoTitle").innerText = videos[id].title;
 document.getElementById("mainImage").src = videos[id].image;
-document.getElementById("mainViews2").innerText =
-  getViews(id) + " views";
+document.getElementById("mainViews2").innerText = getViews(id) + " views";
+
 // ==== RANDOM FUNCTION ====
 function randomLike(){
 return Math.floor(Math.random()*6)+94;
@@ -328,6 +332,24 @@ document.getElementById("dislikePercent").innerText = (100-like)+"%";
 document.getElementById("commentCount").innerText = randomComments();
   
 const related = document.getElementById("relatedVideos");
+related.innerHTML = "";
+
+videos.forEach((video,index)=>{
+  if(index !== id){
+    related.innerHTML += `
+      <div class="related-item">
+        <a href="video.html?id=${index}" style="text-decoration:none;color:white;">
+          <img src="${video.image}" loading="lazy">
+          <p class="related-title">${video.title}</p>
+          <p class="related-views">
+            ${getViews(index)} views • ${video.duration}
+          </p>
+        </a>
+      </div>
+    `;
+  }
+});
+</script>
 
 function randomDuration(){
 return Math.floor(Math.random() * 8) + 5; 
