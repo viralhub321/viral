@@ -161,7 +161,8 @@ align-items:center;
 justify-content:center;
 font-size:30px;
 color:white;
-pointer-events:none;
+cursor:pointer;
+z-index:20;
 }
 
 .access-count{
@@ -170,11 +171,7 @@ font-size:14px;
 color:#ccc;
 text-align:center;
 }
-margin-top:10px;
-font-size:14px;
-color:#ccc;
-text-align:center;
-}
+
 .fake-controls{
 position:absolute;
 bottom:0;
@@ -460,27 +457,6 @@ setInterval(updateAccess, 3000);
 </script>
 
 <script>
-let fakeProgress = 0;
-const bar = document.getElementById("progressBar");
-const timeText = document.getElementById("timeText");
-
-let current = 0;
-const total = 492; // 8 menit 12 detik
-
-setInterval(()=>{
-  if(current < total * 0.95){
-    current++;
-    fakeProgress = (current / total) * 100;
-    bar.style.width = fakeProgress + "%";
-
-    let m = Math.floor(current / 60);
-    let s = current % 60;
-    timeText.innerText =
-      `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")} / 08:12`;
-  }
-}, 1000);
-
-<script>
 const playBtn = document.getElementById("fakePlayBtn");
 const overlay = document.getElementById("lockOverlay");
 const bar = document.getElementById("progressBar");
@@ -494,7 +470,10 @@ playBtn.addEventListener("click", ()=>{
   if(started) return;
   started = true;
 
+  // sembunyikan tombol ▶
   playBtn.style.display = "none";
+
+  // tampilkan layar hitam
   overlay.style.display = "flex";
 
   setInterval(()=>{
@@ -510,7 +489,6 @@ playBtn.addEventListener("click", ()=>{
     }
   },1000);
 });
-
 </script>
 
 
